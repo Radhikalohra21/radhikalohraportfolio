@@ -1,7 +1,7 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 // GitHub Pages builds set GITHUB_PAGES=1; the Lovable dev/preview build is unchanged.
-const ghPages = process.env.GITHUB_PAGES === "1";
+const ghPages = process.env["GITHUB_PAGES"] === "1";
 const BASE = "/radhikalohraportfolio";
 
 export default defineConfig({
@@ -18,8 +18,5 @@ export default defineConfig({
         }
       : {}),
   },
-  // The prerendered public output is what GitHub Pages serves; the server bundle
-  // that the default preset also produces is simply not uploaded.
-  ...(ghPages ? { nitro: { prerender: { routes: [`${BASE}/`] } } } : {}),
   ...(ghPages ? { vite: { base: `${BASE}/` } } : {}),
 });
